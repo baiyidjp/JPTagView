@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/baiyidjp/JPTagView.git", :tag => "#{s.version}" }
   s.source_files  = "JPTagView/*.{h,m}"
   s.requires_arc = true
-
+# pod trunk push --allow-warnings
 end
