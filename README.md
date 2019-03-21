@@ -21,15 +21,15 @@ pod 'JPTagView'
 
 > 使用方法见demo
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/000.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/000.gif)
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/111.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/111.gif)
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/222.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/222.gif)
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/333.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/333.gif)
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/444.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/444.gif)
 
-![image](https://github.com/baiyidjp/JPTagView/blob/master/gif/555.gif)
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/555.gif)
 
