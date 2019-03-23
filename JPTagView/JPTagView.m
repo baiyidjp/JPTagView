@@ -406,7 +406,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         
         for (JPTagModel *tagModel in sectionModel.subTags) {
             
-            CGSize nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:self.tagNameNormalFont}];
+            CGSize nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:tagModel.tagNameNormalFont}];
             CGFloat nameWidth = nameSize.width+self.tagNameContentInset.left+self.tagNameContentInset.right;
             CGFloat nameHeight = nameSize.height+self.tagNameContentInset.top+self.tagNameContentInset.bottom;
             if (nameWidth < self.tagMinWidth) {
@@ -415,7 +415,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
             if (nameHeight < self.tagMinHeight) {
                 nameHeight = self.tagMinHeight;
             }
-            tagModel.tagSize = CGSizeMake(nameWidth, (NSInteger)nameHeight);
+            tagModel.tagSize = CGSizeMake(nameWidth+tagModel.tagBackContentInset.left+tagModel.tagBackContentInset.right, (NSInteger)(nameHeight+tagModel.tagBackContentInset.top+tagModel.tagBackContentInset.bottom));
         }
     }
     
