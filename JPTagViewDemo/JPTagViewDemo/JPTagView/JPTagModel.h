@@ -46,6 +46,9 @@ typedef NS_OPTIONS(NSUInteger, TagDeleteCorner) {
 /** frame */
 @property(nonatomic,assign) CGRect tagLayoutFrame;
 
+/** isCustomTag */
+@property(nonatomic,assign) BOOL isCustomTag;
+
 /** tagDeleteImage */
 @property(nonatomic,strong) UIImage *tagDeleteImage;
 /** selected 是否被选中 default NO */
@@ -60,6 +63,8 @@ typedef NS_OPTIONS(NSUInteger, TagDeleteCorner) {
 @property(nonatomic,assign) BOOL isShakeWhenShowDelete;
 /** isShowShakeAnimation default NO 开始动画 */
 @property(nonatomic,assign) BOOL isShowShakeAnimation;
+/** isCanSelectedTag default YES */
+@property(nonatomic,assign) BOOL isCanSelectedTag;
 
 
 /** tag section height default 50 */
@@ -111,7 +116,7 @@ typedef NS_OPTIONS(NSUInteger, TagDeleteCorner) {
 @property(nonatomic,strong) NSString *tagBackNormalImageUrl;
 /** tagBack selected backImageUrl default nil */
 @property(nonatomic,strong) NSString *tagBackSelectedImageUrl;
-/** tag text contentinset default 8,8,8,8 */
+/** tag back contentinset default (0,0,0,0) 为了适配显示delete  */
 @property(nonatomic,assign) UIEdgeInsets tagBackContentInset;
 
 @end

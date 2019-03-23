@@ -64,7 +64,9 @@
     tagView.tagColumnMargin = 2;
     tagView.tagRowMargin = 2;
     
-    tagView.dataArray = models;
+//    tagView.isShowSection = NO;
+    
+    [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
 }

@@ -27,6 +27,7 @@
 		B8161EE622433356001CF43F /* ViewControllerThird.m in Sources */ = {isa = PBXBuildFile; fileRef = B8161EE522433356001CF43F /* ViewControllerThird.m */; };
 		B8161EE922433360001CF43F /* ViewControllerFourth.m in Sources */ = {isa = PBXBuildFile; fileRef = B8161EE822433360001CF43F /* ViewControllerFourth.m */; };
 		B8161EEC22433381001CF43F /* ViewControllerFifth.m in Sources */ = {isa = PBXBuildFile; fileRef = B8161EEB22433381001CF43F /* ViewControllerFifth.m */; };
+		B85F343222460AC900BA7D14 /* ViewControllerSix.m in Sources */ = {isa = PBXBuildFile; fileRef = B85F343122460AC900BA7D14 /* ViewControllerSix.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		B8161EE822433360001CF43F /* ViewControllerFourth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerFourth.m; sourceTree = "<group>"; };
 		B8161EEA22433381001CF43F /* ViewControllerFifth.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerFifth.h; sourceTree = "<group>"; };
 		B8161EEB22433381001CF43F /* ViewControllerFifth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerFifth.m; sourceTree = "<group>"; };
+		B85F343022460AC900BA7D14 /* ViewControllerSix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerSix.h; sourceTree = "<group>"; };
+		B85F343122460AC900BA7D14 /* ViewControllerSix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSix.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 				B8161EE822433360001CF43F /* ViewControllerFourth.m */,
 				B8161EEA22433381001CF43F /* ViewControllerFifth.h */,
 				B8161EEB22433381001CF43F /* ViewControllerFifth.m */,
+				B85F343022460AC900BA7D14 /* ViewControllerSix.h */,
+				B85F343122460AC900BA7D14 /* ViewControllerSix.m */,
 			);
 			path = DemoController;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				B8161EA022425B7F001CF43F /* UIImageView+JPCategory.m in Sources */,
 				B8161E9E22425B7F001CF43F /* JPTagModel.m in Sources */,
 				B8161E9F22425B7F001CF43F /* UIImage+JPCategory.m in Sources */,
+				B85F343222460AC900BA7D14 /* ViewControllerSix.m in Sources */,
 				B8161EE622433356001CF43F /* ViewControllerThird.m in Sources */,
 				B8161E6222425B0F001CF43F /* AppDelegate.m in Sources */,
 			);

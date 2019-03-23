@@ -22,22 +22,12 @@
     
     NSMutableArray *models = [NSMutableArray array];
     
-    for (NSInteger i = 0; i < 10; i++) {
+    for (NSInteger i = 0; i < 50; i++) {
         
-        JPTagModel *sectionModel = [[JPTagModel alloc] init];
-        sectionModel.tagNormalName = [NSString stringWithFormat:@"组头_%zd",i];
+        JPTagModel *model = [[JPTagModel alloc] init];
+        model.tagNormalName = [NSString stringWithFormat:@"代号%@_%zd",i%2 ? @"":@"偶数",i];
         
-        NSMutableArray *sectionModels = [NSMutableArray array];
-        for (NSInteger i = 0; i < 10; i++) {
-            
-            JPTagModel *model = [[JPTagModel alloc] init];
-            model.tagNormalName = [NSString stringWithFormat:@"代号%@_%zd",i%2 ? @"":@"偶数",i];
-            [sectionModels addObject:model];
-        }
-        
-        sectionModel.subTags = [sectionModels copy];
-        
-        [models addObject:sectionModel];
+        [models addObject:model];
     }
     
     CGFloat naviagtionHeight = 64;
@@ -54,7 +44,7 @@
     //只展示subTags,忽略了section
     tagView.isShowSection = NO;
     
-    tagView.dataArray = models;
+    [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
 }

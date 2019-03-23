@@ -30,13 +30,13 @@
     self = [super initWithFrame:frame];
     if (self) {
         
-        [self p_SetUI];
     }
     return self;
 }
 
-#pragma mark 设置UI视图
-- (void)p_SetUI {
+- (void)setTagModel:(JPTagModel *)tagModel {
+    
+    _tagModel = tagModel;
     
     UIButton *tagBackImageButton = [[UIButton alloc] init];
     tagBackImageButton.userInteractionEnabled = NO;
@@ -44,12 +44,6 @@
     
     UIButton *tagDeleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
     self.tagDeleteButton = tagDeleteButton;
-    
-}
-
-- (void)setTagModel:(JPTagModel *)tagModel {
-    
-    _tagModel = tagModel;
     
     [self.contentView addSubview:self.tagBackImageButton];
     [self.contentView addSubview:self.tagDeleteButton];
@@ -61,16 +55,16 @@
     [self.tagBackImageButton setTitle:tagModel.tagNormalName forState:UIControlStateNormal];
     [self.tagBackImageButton setTitle:tagModel.tagSelectedName.length ? tagModel.tagSelectedName : tagModel.tagNormalName forState:UIControlStateSelected];
     
-    [self.tagBackImageButton setTitleColor:tagModel.tagNameNormalColor forState:UIControlStateNormal];
-    [self.tagBackImageButton setTitleColor:tagModel.tagNameSelectedColor ? tagModel.tagNameSelectedColor : tagModel.tagNameNormalColor forState:UIControlStateSelected];
-    
-    if (tagModel.tagNormalAttributedName.length) {
+    if (!tagModel.tagNormalName.length && tagModel.tagNormalAttributedName.length) {
         [self.tagBackImageButton setAttributedTitle:tagModel.tagNormalAttributedName forState:UIControlStateNormal];
     }
     
-    if (tagModel.tagSelectedAttributedName.length) {
+    if (!tagModel.tagNormalName.length && !tagModel.tagSelectedName.length && tagModel.tagSelectedAttributedName.length) {
         [self.tagBackImageButton setAttributedTitle:tagModel.tagSelectedAttributedName forState:UIControlStateSelected];
     }
+    
+    [self.tagBackImageButton setTitleColor:tagModel.tagNameNormalColor forState:UIControlStateNormal];
+    [self.tagBackImageButton setTitleColor:tagModel.tagNameSelectedColor ? tagModel.tagNameSelectedColor : tagModel.tagNameNormalColor forState:UIControlStateSelected];
     
     if (tagModel.isSelected) {
         

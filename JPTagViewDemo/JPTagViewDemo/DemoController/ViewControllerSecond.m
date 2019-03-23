@@ -28,10 +28,10 @@
         sectionModel.tagNormalName = [NSString stringWithFormat:@"组头_%zd",i];
         
         NSMutableArray *sectionModels = [NSMutableArray array];
-        for (NSInteger i = 0; i < 10; i++) {
+        for (NSInteger i = 0; i < 5; i++) {
             
             JPTagModel *model = [[JPTagModel alloc] init];
-            model.tagNormalName = [NSString stringWithFormat:@"代号%@_%zd",i%2 ? @"":@"偶数",i];
+            model.tagNormalName = [NSString stringWithFormat:@"代号%zd",i];
             [sectionModels addObject:model];
         }
         
@@ -49,7 +49,7 @@
     
     //一定要设置最大高度,内部会默认计算,跟最大高度比较 取较小的.
     //如不设置,当TagView超出屏幕范围时,无法滚动.
-    tagView.tagViewMaxHeight = (self.view.bounds.size.height-naviagtionHeight)*0.5;
+    tagView.tagViewMaxHeight = (self.view.bounds.size.height-naviagtionHeight)*1;
     
     //展示删除的时候需要调节一些间距 这样效果跟不展示delete是一样的UI展示,当然可以不更改
     tagView.isShowDelete = YES;
@@ -59,7 +59,7 @@
     //设置不可以点击
     tagView.isCanSelectedTag = NO;
     
-    tagView.dataArray = models;
+    [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
 }

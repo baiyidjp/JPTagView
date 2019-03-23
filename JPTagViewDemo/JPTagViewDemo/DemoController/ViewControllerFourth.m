@@ -64,7 +64,7 @@
     //section组 与 当前组第一行tag的间距
     tagView.tagSectionMargin = 10;
     
-    tagView.dataArray = models;
+    [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
 }

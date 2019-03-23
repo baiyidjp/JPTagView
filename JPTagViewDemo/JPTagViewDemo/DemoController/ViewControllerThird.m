@@ -55,7 +55,7 @@
     tagView.tagBorderColor = [UIColor redColor];
     tagView.tagBorderWidth = 1;
     
-    tagView.dataArray = models;
+    [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
 }

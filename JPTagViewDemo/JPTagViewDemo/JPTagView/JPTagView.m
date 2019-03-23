@@ -27,6 +27,8 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 @property(nonatomic,strong) NSIndexPath *selectedIndexPath;
 /** isLongPressDeleteStatus */
 @property(nonatomic,assign) BOOL isLongPressDeleteStatus;
+/** tagDataModels */
+@property(nonatomic,strong) NSMutableArray *tagDataModels;
 
 @end
 
@@ -96,6 +98,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     self.tagNameSelectedColor = [UIColor whiteColor];
     
     self.isShowTagCornerRadius = YES;
+    self.tagCornerRadius = 0;
     self.isShowTagBorder = NO;
     self.tagBorderWidth = 0;
     self.tagBorderColor = [UIColor clearColor];
@@ -133,12 +136,12 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     
-    return self.dataArray.count;
+    return self.tagDataModels.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    JPTagModel *sectionModel = self.dataArray[section];
+    JPTagModel *sectionModel = self.tagDataModels[section];
     
     return sectionModel.subTags.count;
 }
@@ -149,7 +152,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 
     [cell.contentView jp_removeAllSubViews];
     
-    JPTagModel *sectionModel = self.dataArray[indexPath.section];
+    JPTagModel *sectionModel = self.tagDataModels[indexPath.section];
     
     JPTagModel *tagModel = sectionModel.subTags[indexPath.item];
     
@@ -172,7 +175,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         
-        JPTagModel *sectionModel = self.dataArray[indexPath.section];
+        JPTagModel *sectionModel = self.tagDataModels[indexPath.section];
         
         UICollectionReusableView *sectionHeaderView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:JPTagHeaderCellID forIndexPath:indexPath];
         
@@ -204,22 +207,26 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (!self.isCanSelectedTag) {
+    JPTagModel *sectionModel = self.tagDataModels[indexPath.section];
+    
+    JPTagModel *tagModel = sectionModel.subTags[indexPath.item];
+    
+    if (!tagModel.isCanSelectedTag) {
+        
         return;
     }
     
-    if (self.isCanSelectedMoreTag) {
+    if (tagModel.isSelected && !tagModel.isTagCanClickWhenSelected) {
         
-        JPTagModel *sectionModel = self.dataArray[indexPath.section];
-        
-        JPTagModel *tagModel = sectionModel.subTags[indexPath.item];
-        
-        if (tagModel.isSelected && !tagModel.isTagCanClickWhenSelected) {
-            
-            return;
+        if (self.delegate && [self.delegate respondsToSelector:@selector(tagView:didSelectedItem:)]) {
+            [self.delegate tagView:self didSelectedItem:indexPath];
         }
-        
-        tagModel.isSelected = !tagModel.isSelected;
+        return;
+    }
+    
+    tagModel.isSelected = !tagModel.isSelected;
+    
+    if (self.isCanSelectedMoreTag) {
         
         [UIView performWithoutAnimation:^{
            
@@ -235,19 +242,13 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 
     } else {
         
-        JPTagModel *sectionModel = self.dataArray[indexPath.section];
-        
-        JPTagModel *tagModel = sectionModel.subTags[indexPath.item];
-        
-        tagModel.isSelected = !tagModel.isSelected;
-        
         [UIView performWithoutAnimation:^{
             
             [collectionView performBatchUpdates:^{
                 
                 if (self.selectedIndexPath && ![self.selectedIndexPath isEqual:indexPath]) {
                     
-                    JPTagModel *sectionModel = self.dataArray[self.selectedIndexPath.section];
+                    JPTagModel *sectionModel = self.tagDataModels[self.selectedIndexPath.section];
                     
                     JPTagModel *selectedTagModel = sectionModel.subTags[self.selectedIndexPath.item];
                     
@@ -268,6 +269,11 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         
         self.selectedIndexPath = indexPath;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tagView:didSelectedItem:)]) {
+        [self.delegate tagView:self didSelectedItem:indexPath];
+    }
+
 }
 
 #pragma mark - long press
@@ -277,7 +283,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         
         self.isLongPressDeleteStatus = !self.isLongPressDeleteStatus;
         
-        for (JPTagModel *sectionModel in self.dataArray) {
+        for (JPTagModel *sectionModel in self.tagDataModels) {
             
             for (JPTagModel *tagModel in sectionModel.subTags) {
                 
@@ -297,7 +303,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tagCell];
     
     //delete
-    JPTagModel *sectionModel = self.dataArray[indexPath.section];
+    JPTagModel *sectionModel = self.tagDataModels[indexPath.section];
     
     NSMutableArray *subTags = [NSMutableArray arrayWithArray:sectionModel.subTags];
     
@@ -305,65 +311,95 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     sectionModel.subTags = [subTags copy];
     
-    if (subTags.count) {
+    [self.collectionView performBatchUpdates:^{
         
-        [self.collectionView performBatchUpdates:^{
+        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+        
+    } completion:^(BOOL finished) {
+        
+        if (!subTags.count) {
             
-            [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+            [self.tagDataModels removeObject:sectionModel];
             
-        } completion:^(BOOL finished) {
-        }];
+            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+        }
+    }];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tagView:didDeleteItem:)]) {
+        [self.delegate tagView:self didDeleteItem:indexPath];
+    }
+
+}
+
+- (void)setTagViewDataWith:(NSArray<JPTagModel *> *)dataArray {
+    
+    [self.tagDataModels removeAllObjects];
+    
+    if (!self.isShowSection) {
+        
+        JPTagModel *sectionModel = [[JPTagModel alloc] init];
+        
+        sectionModel.subTags = dataArray;
+        
+        [self.tagDataModels addObject:sectionModel];
         
     } else {
         
-        NSMutableArray *sectionDataArray = [NSMutableArray arrayWithArray:self.dataArray];
-        [sectionDataArray removeObject:sectionModel];
-        self.dataArray = [sectionDataArray copy];
+        [self.tagDataModels addObjectsFromArray:dataArray];
     }
     
-}
+    for (JPTagModel *sectionModel in self.tagDataModels) {
+        
+        if (!sectionModel.isCustomTag) {
+            
+            sectionModel.tagSectionHeight = self.tagSectionHeight;
+            sectionModel.tagSectionBackColor = self.tagSectionBackColor;
+            sectionModel.tagSectionNameFont = self.tagSectionNameFont;
+            sectionModel.tagSectionNameColor = self.tagSectionNameColor;
+            sectionModel.tagSectionNameInset = self.tagSectionNameInset;
+            sectionModel.tagSectionAlignment = self.tagSectionAlignment;
 
-- (void)setDataArray:(NSArray<JPTagModel *> *)dataArray {
-    
-    _dataArray = dataArray;
-    
-    for (JPTagModel *sectionModel in dataArray) {
-        
-        sectionModel.tagSectionHeight = sectionModel.tagSectionHeight ? sectionModel.tagSectionHeight : self.tagSectionHeight;
-        sectionModel.tagSectionBackColor = sectionModel.tagSectionBackColor ? sectionModel.tagSectionBackColor : self.tagSectionBackColor;
-        sectionModel.tagSectionNameFont = sectionModel.tagSectionNameFont ? sectionModel.tagSectionNameFont : self.tagSectionNameFont;
-        sectionModel.tagSectionNameColor = sectionModel.tagSectionNameColor ? sectionModel.tagSectionNameColor : self.tagSectionNameColor;
-        sectionModel.tagSectionNameInset = sectionModel.tagSectionNameInset.left ? sectionModel.tagSectionNameInset : self.tagSectionNameInset;
-        sectionModel.tagSectionAlignment = sectionModel.tagSectionAlignment ? sectionModel.tagSectionAlignment : self.tagSectionAlignment;
-        
+        }
         for (JPTagModel *tagModel in sectionModel.subTags) {
             
-            tagModel.tagDeleteImage = tagModel.tagDeleteImage ? tagModel.tagDeleteImage : self.tagDeleteImage;
-            tagModel.isShowDelete = tagModel.isShowDelete ? YES : self.isShowDelete;
-            tagModel.isTagCanClickWhenSelected = tagModel.isTagCanClickWhenSelected ? YES : self.isTagCanClickWhenSelected;
-            tagModel.isShakeWhenShowDelete = tagModel.isShakeWhenShowDelete ? YES : self.isShakeWhenShowDelete;
+            if (!tagModel.isCustomTag) {
+                
+                tagModel.tagDeleteImage = self.tagDeleteImage;
+                tagModel.isShowDelete = self.isShowDelete;
+                tagModel.isTagCanClickWhenSelected = self.isTagCanClickWhenSelected;
+                tagModel.isShakeWhenShowDelete = self.isShakeWhenShowDelete;
+                tagModel.isCanSelectedTag = self.isCanSelectedTag;
+                
+                tagModel.tagNameNormalFont = self.tagNameNormalFont;
+                tagModel.tagNameSelectedFont = self.tagNameSelectedFont;
+                tagModel.tagNameNormalColor = self.tagNameNormalColor;
+                tagModel.tagNameSelectedColor = self.tagNameSelectedColor;
+                
+                tagModel.isShowTagCornerRadius = self.isShowTagCornerRadius;
+                tagModel.isShowTagBorder = self.isShowTagBorder;
+                tagModel.tagBorderWidth = self.tagBorderWidth;
+                tagModel.tagBorderColor = self.tagBorderColor;
+                
+                tagModel.tagDeleteCorner = self.tagDeleteCorner;
+                
+                tagModel.tagBackNormalColor =  self.tagBackNormalColor;
+                tagModel.tagBackSelectedColor =  self.tagBackSelectedColor;
+                tagModel.tagBackNormalImage =  self.tagBackNormalImage;
+                tagModel.tagBackSelectedImage =  self.tagBackSelectedImage;
+                tagModel.tagBackNormalImageUrl =  self.tagBackNormalImageUrl;
+                tagModel.tagBackSelectedImageUrl =  self.tagBackSelectedImageUrl;
+                tagModel.tagBackContentInset =  self.tagBackContentInset;
+            }
             
-            tagModel.tagNameNormalFont = tagModel.tagNameNormalFont ? tagModel.tagNameNormalFont : self.tagNameNormalFont;
-            tagModel.tagNameSelectedFont = tagModel.tagNameSelectedFont ? tagModel.tagNameSelectedFont : self.tagNameSelectedFont;
-            tagModel.tagNameNormalColor = tagModel.tagNameNormalColor ? tagModel.tagNameNormalColor : self.tagNameNormalColor;
-            tagModel.tagNameSelectedColor = tagModel.tagNameSelectedColor ? tagModel.tagNameSelectedColor : self.tagNameSelectedColor;
             
-            tagModel.isShowTagCornerRadius = tagModel.isShowTagCornerRadius ? YES : self.isShowTagCornerRadius;
-            tagModel.isShowTagBorder = tagModel.isShowTagBorder ? YES : self.isShowTagBorder;
-            tagModel.tagBorderWidth = tagModel.tagBorderWidth ? tagModel.tagBorderWidth : self.tagBorderWidth;
-            tagModel.tagBorderColor = tagModel.tagBorderColor ? tagModel.tagBorderColor : self.tagBorderColor;
-            
-            tagModel.tagDeleteCorner = tagModel.tagDeleteCorner ? tagModel.tagDeleteCorner : self.tagDeleteCorner;
-            
-            tagModel.tagBackNormalColor = tagModel.tagBackNormalColor ? tagModel.tagBackNormalColor : self.tagBackNormalColor;
-            tagModel.tagBackSelectedColor = tagModel.tagBackSelectedColor ? tagModel.tagBackSelectedColor : self.tagBackSelectedColor;
-            tagModel.tagBackNormalImage = tagModel.tagBackNormalImage ? tagModel.tagBackNormalImage : self.tagBackNormalImage;
-            tagModel.tagBackSelectedImage = tagModel.tagBackSelectedImage ? tagModel.tagBackSelectedImage : self.tagBackSelectedImage;
-            tagModel.tagBackNormalImageUrl = tagModel.tagBackNormalImageUrl.length ? tagModel.tagBackNormalImageUrl : self.tagBackNormalImageUrl;
-            tagModel.tagBackSelectedImageUrl = tagModel.tagBackSelectedImageUrl.length ? tagModel.tagBackSelectedImageUrl : self.tagBackSelectedImageUrl;
-            tagModel.tagBackContentInset = tagModel.tagBackContentInset.left ? tagModel.tagBackContentInset : self.tagBackContentInset;
-            
-            CGSize nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:tagModel.tagNameNormalFont}];
+            CGSize nameSize = CGSizeZero;
+            if (tagModel.tagNormalName && tagModel.tagNormalName.length) {            
+                nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:tagModel.tagNameNormalFont}];
+            }
+            if (tagModel.tagNormalAttributedName && tagModel.tagNormalAttributedName.length) {
+                nameSize = [tagModel.tagNormalAttributedName boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+            }
+
             CGFloat nameWidth = nameSize.width+self.tagNameContentInset.left+self.tagNameContentInset.right;
             CGFloat nameHeight = nameSize.height+self.tagNameContentInset.top+self.tagNameContentInset.bottom;
             if (nameWidth < self.tagMinWidth) {
@@ -374,11 +410,15 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
             }
             tagModel.tagSize = CGSizeMake(nameWidth+tagModel.tagBackContentInset.left+tagModel.tagBackContentInset.right, (NSInteger)(nameHeight+tagModel.tagBackContentInset.top+tagModel.tagBackContentInset.bottom));
             
-            tagModel.tagCornerRadius = ((NSInteger)nameHeight)*0.5;
+            if (!tagModel.isCustomTag) {            
+                tagModel.tagCornerRadius = self.tagCornerRadius ? self.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+            } else {
+                tagModel.tagCornerRadius = tagModel.tagCornerRadius ? tagModel.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+            }
         }
     }
 
-    self.flowLayout.dataArray = dataArray;
+    self.flowLayout.dataArray = self.tagDataModels;
     
     CGFloat viewHeight = [self.flowLayout getTagViewHeight];
     
@@ -525,6 +565,15 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         _flowLayout.isShowSection = self.isShowSection;
     }
     return _flowLayout;
+}
+
+- (NSMutableArray *)tagDataModels{
+    
+    if (!_tagDataModels) {
+        
+        _tagDataModels = [NSMutableArray array];
+    }
+    return _tagDataModels;
 }
 
 @end
