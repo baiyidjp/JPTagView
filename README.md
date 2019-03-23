@@ -33,3 +33,5 @@ pod 'JPTagView'
 
 ![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/555.gif)
 
+![image](https://github.com/baiyidjp/JPTagViewDemo/blob/master/gif/666.gif)
+
