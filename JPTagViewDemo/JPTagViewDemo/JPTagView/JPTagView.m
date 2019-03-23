@@ -68,6 +68,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     self.tagViewScrollEnabled = YES;
     self.isCanSelectedTag = YES;
     self.isCanSelectedMoreTag = YES;
+    self.isCanSelectedMoreTagInSection = YES;
     self.isShowSection = YES;
     
     self.tagColumnMargin = 10;
@@ -228,17 +229,45 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     if (self.isCanSelectedMoreTag) {
         
-        [UIView performWithoutAnimation:^{
-           
-            [collectionView performBatchUpdates:^{
+        if (self.isCanSelectedMoreTagInSection) {
+            
+            [UIView performWithoutAnimation:^{
                 
-                [collectionView reloadItemsAtIndexPaths:@[indexPath]];
-                
-            } completion:^(BOOL finished) {
+                [collectionView performBatchUpdates:^{
+                    
+                    [collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
                 
             }];
+        } else {
             
-        }];
+            if (tagModel.isSelected) {
+                
+                for (JPTagModel *model in sectionModel.subTags) {
+                    
+                    if (model.isSelected && ![tagModel isEqual:model]) {
+                        model.isSelected = NO;
+                    }
+                }
+            }
+            [UIView performWithoutAnimation:^{
+                
+                [collectionView performBatchUpdates:^{
+                    
+                    [collectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+                    
+                } completion:^(BOOL finished) {
+                    
+                }];
+                
+            }];
+
+            
+        }
+        
 
     } else {
         
@@ -442,11 +471,32 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
 
 - (CGFloat)getTagViewHeight:(NSArray<JPTagModel *> *)dataArray {
     
-    for (JPTagModel *sectionModel in dataArray) {
+    NSMutableArray *tagDataModels = [NSMutableArray array];
+    
+    if (!self.isShowSection) {
+        
+        JPTagModel *sectionModel = [[JPTagModel alloc] init];
+        
+        sectionModel.subTags = dataArray;
+        
+        [tagDataModels addObject:sectionModel];
+        
+    } else {
+        
+        [tagDataModels addObjectsFromArray:dataArray];
+    }
+    
+    for (JPTagModel *sectionModel in tagDataModels) {
         
         for (JPTagModel *tagModel in sectionModel.subTags) {
             
-            CGSize nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:tagModel.tagNameNormalFont}];
+            CGSize nameSize = CGSizeZero;
+            if (tagModel.tagNormalName && tagModel.tagNormalName.length) {
+                nameSize = [tagModel.tagNormalName sizeWithAttributes:@{NSFontAttributeName:self.tagNameNormalFont}];
+            }
+            if (tagModel.tagNormalAttributedName && tagModel.tagNormalAttributedName.length) {
+                nameSize = [tagModel.tagNormalAttributedName boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
+            }
             CGFloat nameWidth = nameSize.width+self.tagNameContentInset.left+self.tagNameContentInset.right;
             CGFloat nameHeight = nameSize.height+self.tagNameContentInset.top+self.tagNameContentInset.bottom;
             if (nameWidth < self.tagMinWidth) {
@@ -459,7 +509,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         }
     }
     
-    self.flowLayout.dataArray = dataArray;
+    self.flowLayout.dataArray = tagDataModels;
     
     return [self.flowLayout getTagViewHeight];
 }

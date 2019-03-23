@@ -51,6 +51,8 @@
     //如不设置,当TagView超出屏幕范围时,无法滚动.
     tagView.tagViewMaxHeight = self.view.bounds.size.height-naviagtionHeight;
     
+//    tagView.isCanSelectedMoreTagInSection = NO;
+    
     [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
