@@ -68,6 +68,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** isCanSelectedMoreTag default YES */
 @property(nonatomic,assign) BOOL isCanSelectedMoreTag;
 
+/** isCanSelectedMoreTagInSection default YES */
+@property(nonatomic,assign) BOOL isCanSelectedMoreTagInSection;
+
 /** isShowSection 分组模式 default YES */
 @property(nonatomic,assign) BOOL isShowSection;
 
