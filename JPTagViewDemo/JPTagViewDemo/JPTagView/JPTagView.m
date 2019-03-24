@@ -348,9 +348,11 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         
         if (!subTags.count) {
             
-            [self.tagDataModels removeObject:sectionModel];
-            
-            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+            if (self.isShowSection) {
+                
+                [self.tagDataModels removeObject:sectionModel];
+                [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+            }
         }
     }];
     
