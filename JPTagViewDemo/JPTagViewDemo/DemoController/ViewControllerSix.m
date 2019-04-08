@@ -58,8 +58,8 @@
     addModel.tagNameNormalFont = [UIFont systemFontOfSize:14];
     
     addModel.isShowTagBorder = YES;
-    addModel.tagBorderColor = [UIColor colorWithRed:90/255.0 green:43/255.0 blue:129/255.0 alpha:1];
-    addModel.tagBorderWidth = 1;
+    addModel.tagSelectedBorderColor = [UIColor colorWithRed:90/255.0 green:43/255.0 blue:129/255.0 alpha:1];
+    addModel.tagSelectedBorderWidth = 1;
     addModel.isShowTagCornerRadius = YES;
     
     addModel.isTagCanClickWhenSelected = NO;

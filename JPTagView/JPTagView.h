@@ -124,17 +124,35 @@ NS_ASSUME_NONNULL_BEGIN
 /** isShowCornerRadius default YES */
 @property(nonatomic,assign) BOOL isShowTagCornerRadius;
 
-/** tagCornerRadius default h*0.5 */
+/** tagCornerRadius default h*0.5 默认会设置到normal和selected 如果设置了normal/selected 则当前设置失效 */
 @property(nonatomic,assign) CGFloat tagCornerRadius;
+
+/** tagNormalCornerRadius default h*0.5 */
+@property(nonatomic,assign) CGFloat tagNormalCornerRadius;
+
+/** tagSelectedtCornerRadius default h*0.5 */
+@property(nonatomic,assign) CGFloat tagSelectedtCornerRadius;
 
 /** isShowTagBorder default NO */
 @property(nonatomic,assign) BOOL isShowTagBorder;
 
-/** tagBorderWidth default 0 */
+/** tagBorderWidth default 0 默认会设置到normal和selected 如果设置了normal/selected 则当前设置失效 */
 @property(nonatomic,assign) CGFloat tagBorderWidth;
 
-/** tagBorderColor default clear */
+/** tagBorderColor default clear 默认会设置到normal和selected 如果设置了normal/selected 则当前设置失效 */
 @property(nonatomic,strong) UIColor *tagBorderColor;
+
+/** tagNormalBorderWidth default 0 */
+@property(nonatomic,assign) CGFloat tagNormalBorderWidth;
+
+/** tagNormalBorderColor default clear */
+@property(nonatomic,strong) UIColor *tagNormalBorderColor;
+
+/** tagSelectedBorderWidth default 0 */
+@property(nonatomic,assign) CGFloat tagSelectedBorderWidth;
+
+/** tagSelectedBorderColor default clear */
+@property(nonatomic,strong) UIColor *tagSelectedBorderColor;
 
 //删除相关
 

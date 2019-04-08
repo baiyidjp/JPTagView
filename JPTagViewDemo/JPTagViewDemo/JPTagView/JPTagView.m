@@ -100,9 +100,15 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     self.isShowTagCornerRadius = YES;
     self.tagCornerRadius = 0;
+    self.tagNormalCornerRadius = 0;
+    self.tagSelectedtCornerRadius = 0;
     self.isShowTagBorder = NO;
     self.tagBorderWidth = 0;
+    self.tagNormalBorderWidth = 0;
+    self.tagSelectedBorderWidth = 0;
     self.tagBorderColor = [UIColor clearColor];
+    self.tagNormalBorderColor = [UIColor clearColor];
+    self.tagSelectedBorderColor = [UIColor clearColor];
     self.tagDeleteCorner = TagDeleteCornerTopRight;
     
     self.tagBackNormalColor = [UIColor grayColor];
@@ -408,8 +414,17 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
                 
                 tagModel.isShowTagCornerRadius = self.isShowTagCornerRadius;
                 tagModel.isShowTagBorder = self.isShowTagBorder;
-                tagModel.tagBorderWidth = self.tagBorderWidth;
-                tagModel.tagBorderColor = self.tagBorderColor;
+                if (self.tagNormalBorderWidth || self.tagSelectedBorderWidth) {
+                    tagModel.tagNormalBorderWidth = self.tagNormalBorderWidth;
+                    tagModel.tagSelectedBorderWidth = self.tagSelectedBorderWidth;
+                    tagModel.tagNormalBorderColor = self.tagNormalBorderColor;
+                    tagModel.tagSelectedBorderColor = self.tagSelectedBorderColor;
+                } else {
+                    tagModel.tagNormalBorderWidth = self.tagBorderWidth;
+                    tagModel.tagSelectedBorderWidth = self.tagBorderWidth;
+                    tagModel.tagNormalBorderColor = self.tagBorderColor;
+                    tagModel.tagSelectedBorderColor = self.tagBorderColor;
+                }
                 
                 tagModel.tagDeleteCorner = self.tagDeleteCorner;
                 
@@ -441,10 +456,17 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
             }
             tagModel.tagSize = CGSizeMake(nameWidth+tagModel.tagBackContentInset.left+tagModel.tagBackContentInset.right, (NSInteger)(nameHeight+tagModel.tagBackContentInset.top+tagModel.tagBackContentInset.bottom));
             
-            if (!tagModel.isCustomTag) {            
-                tagModel.tagCornerRadius = self.tagCornerRadius ? self.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+            if (tagModel.isCustomTag) {
+                tagModel.tagNormalCornerRadius = tagModel.tagNormalCornerRadius ? tagModel.tagNormalCornerRadius : ((NSInteger)nameHeight)*0.5;
+                tagModel.tagSelectedtCornerRadius = tagModel.tagSelectedtCornerRadius ? tagModel.tagSelectedtCornerRadius : ((NSInteger)nameHeight)*0.5;
             } else {
-                tagModel.tagCornerRadius = tagModel.tagCornerRadius ? tagModel.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+                if (self.tagNormalCornerRadius || self.tagSelectedtCornerRadius) {
+                    tagModel.tagNormalCornerRadius = self.tagNormalCornerRadius ? self.tagNormalCornerRadius : ((NSInteger)nameHeight)*0.5;
+                    tagModel.tagSelectedtCornerRadius = self.tagSelectedtCornerRadius ? self.tagSelectedtCornerRadius : ((NSInteger)nameHeight)*0.5;
+                } else {
+                    tagModel.tagNormalCornerRadius = self.tagCornerRadius ? self.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+                    tagModel.tagSelectedtCornerRadius = self.tagCornerRadius ? self.tagCornerRadius : ((NSInteger)nameHeight)*0.5;
+                }
             }
         }
     }

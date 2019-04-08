@@ -92,13 +92,19 @@ typedef NS_OPTIONS(NSUInteger, TagDeleteCorner) {
 /** isShowCornerRadius default YES */
 @property(nonatomic,assign) BOOL isShowTagCornerRadius;
 /** tagCornerRadius default h*0.5 */
-@property(nonatomic,assign) CGFloat tagCornerRadius;
+@property(nonatomic,assign) CGFloat tagNormalCornerRadius;
+/** tagCornerRadius default h*0.5 */
+@property(nonatomic,assign) CGFloat tagSelectedtCornerRadius;
 /** isShowTagBorder default NO */
 @property(nonatomic,assign) BOOL isShowTagBorder;
-/** tagBorderWidth default 0 */
-@property(nonatomic,assign) CGFloat tagBorderWidth;
-/** tagBorderColor default clear */
-@property(nonatomic,strong) UIColor *tagBorderColor;
+/** tagNormalBorderWidth default 0 */
+@property(nonatomic,assign) CGFloat tagNormalBorderWidth;
+/** tagNormalBorderColor default clear */
+@property(nonatomic,strong) UIColor *tagNormalBorderColor;
+/** tagSelectedBorderWidth default 0 */
+@property(nonatomic,assign) CGFloat tagSelectedBorderWidth;
+/** tagSelectedBorderColor default clear */
+@property(nonatomic,strong) UIColor *tagSelectedBorderColor;
 /** tagDeleteCorner delete 位置 default topRight */
 @property(nonatomic,assign) TagDeleteCorner tagDeleteCorner;
 

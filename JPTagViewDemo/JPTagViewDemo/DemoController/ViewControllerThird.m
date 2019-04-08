@@ -52,8 +52,10 @@
     tagView.tagViewMaxHeight = (self.view.bounds.size.height-naviagtionHeight)*1;
     
     tagView.isShowTagBorder = YES;
-    tagView.tagBorderColor = [UIColor redColor];
-    tagView.tagBorderWidth = 1;
+    tagView.tagSelectedBorderWidth = 2;
+    tagView.tagSelectedBorderColor = [UIColor blackColor];
+//    tagView.tagBorderColor = [UIColor redColor];
+//    tagView.tagBorderWidth = 2;
     
     [tagView setTagViewDataWith:models];
     
