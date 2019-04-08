@@ -167,6 +167,10 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     cell.delegate = self;
     
+    if (!self.isCanSelectedMoreTag && tagModel.isSelected) {
+        self.selectedIndexPath = indexPath;
+    }
+    
     if (self.isCanLongPressShowDelete) {
         
         //add long press
