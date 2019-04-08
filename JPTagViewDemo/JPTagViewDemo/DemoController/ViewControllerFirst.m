@@ -26,7 +26,7 @@
         
         JPTagModel *model = [[JPTagModel alloc] init];
         model.tagNormalName = [NSString stringWithFormat:@"代号%@_%zd",i%2 ? @"":@"偶数",i];
-        
+        model.isSelected = !i;
         [models addObject:model];
     }
     
@@ -43,6 +43,8 @@
     
     //只展示subTags,忽略了section
     tagView.isShowSection = NO;
+    
+    tagView.isCanSelectedMoreTag = NO;
     
     [tagView setTagViewDataWith:models];
     
