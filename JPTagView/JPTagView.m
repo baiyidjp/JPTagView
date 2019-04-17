@@ -134,7 +134,9 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     collectionView.showsVerticalScrollIndicator = NO;
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.scrollEnabled = self.tagViewScrollEnabled;
-    collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    if (@available(iOS 11.0, *)) {    
+        collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }
     [self addSubview:collectionView];
     self.collectionView = collectionView;
 }

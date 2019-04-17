@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JPTagView"
-  s.version      = "1.3.9"
+  s.version      = "1.3.10"
   s.summary      = "Customized tag pages."
   s.homepage     = "https://github.com/baiyidjp/JPTagViewDemo"
   s.license      = "MIT"
@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
   s.source_files  = "JPTagView/*.{h,m}"
   s.requires_arc = true
 # pod trunk push --allow-warnings
+# 将修改文件copy到JPTagView
 end
