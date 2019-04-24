@@ -79,9 +79,9 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     self.tagMinHeight = 30;
     self.tagNameContentInset = UIEdgeInsetsMake(6, 14, 6, 14);
     
-    NSBundle *tagViewBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"JPTagView" ofType:@"bundle"]];
-    self.tagDeleteImage = [UIImage imageWithContentsOfFile:[tagViewBundle pathForResource:@"icon_delete@2x" ofType:@"png"]];
+    self.tagDeleteImage = [UIImage imageNamed:@""];
     self.isShowDelete = NO;
+    self.isShowSelectedState = YES;
     self.isTagCanClickWhenSelected = YES;
     self.isCanLongPressShowDelete = NO;
     self.isShakeWhenShowDelete = NO;
@@ -226,6 +226,14 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
     
     if (!tagModel.isCanSelectedTag) {
         
+        return;
+    }
+    
+    if (!tagModel.isShowSelectedState) {
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(tagView:didSelectedItem:)]) {
+            [self.delegate tagView:self didSelectedItem:indexPath];
+        }
         return;
     }
     
@@ -412,6 +420,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
                 tagModel.isTagCanClickWhenSelected = self.isTagCanClickWhenSelected;
                 tagModel.isShakeWhenShowDelete = self.isShakeWhenShowDelete;
                 tagModel.isCanSelectedTag = self.isCanSelectedTag;
+                tagModel.isShowSelectedState = self.isShowSelectedState;
                 
                 tagModel.tagNameNormalFont = self.tagNameNormalFont;
                 tagModel.tagNameSelectedFont = self.tagNameSelectedFont;
@@ -624,7 +633,7 @@ static NSString *JPTagHeaderCellID = @"JPTagHeaderCellID";
         
         self.tagViewBackImageView.hidden = NO;
         //下载网络图片
-        [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagViewBackImageUrl] completed:^(UIImage * _Nullable image, NSURL * _Nullable imageURL) {
+        [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagViewBackImageUrl] completed:^(UIImage * image) {
             
             self.tagViewBackImageView.image = image;
         }];

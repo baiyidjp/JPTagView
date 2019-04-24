@@ -9,7 +9,7 @@
 #import "ViewControllerFirst.h"
 #import "JPTagView.h"
 
-@interface ViewControllerFirst ()
+@interface ViewControllerFirst ()<JPTagViewDelegate>
 
 @end
 
@@ -46,9 +46,18 @@
     
     tagView.isCanSelectedMoreTag = NO;
     
+    tagView.isShowSelectedState = NO;
+    
+    tagView.delegate = self;
+    
     [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];
+}
+
+- (void)tagView:(JPTagView *)tagView didSelectedItem:(NSIndexPath *)indexpath {
+    
+    NSLog(@"selected :%zd-%zd",indexpath.section,indexpath.item);
 }
 
 /*

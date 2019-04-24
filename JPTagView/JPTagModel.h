@@ -65,7 +65,8 @@ typedef NS_OPTIONS(NSUInteger, TagDeleteCorner) {
 @property(nonatomic,assign) BOOL isShowShakeAnimation;
 /** isCanSelectedTag default YES */
 @property(nonatomic,assign) BOOL isCanSelectedTag;
-
+/** isShowSelectedState default YES */
+@property(nonatomic,assign) BOOL isShowSelectedState;
 
 /** tag section height default 50 */
 @property(nonatomic,assign) CGFloat tagSectionHeight;

@@ -10,16 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^JPExternalCompletionBlock)(UIImage * _Nullable image, NSURL * _Nullable imageURL);
+typedef void(^JPExternalCompletionBlock)(UIImage * image);
 
 @interface UIImageView (JPCategory)
-
-/**
- 设置图片
- 
- @param url NSURL图片地址
- */
-- (void)jp_setImageWithURL:(NSURL *)url completed:(JPExternalCompletionBlock)completedBlock;
 
 /**
  下载图片

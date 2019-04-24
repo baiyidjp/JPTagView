@@ -59,6 +59,8 @@
     //设置不可以点击
     tagView.isCanSelectedTag = NO;
     
+    tagView.tagDeleteImage = [UIImage imageNamed:@"icon_delete"];
+    
     [tagView setTagViewDataWith:models];
     
     [self.view addSubview:tagView];

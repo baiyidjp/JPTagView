@@ -72,7 +72,7 @@
         
         if (tagModel.tagBackSelectedImageUrl && tagModel.tagBackSelectedImageUrl.length) {
             //下载网络图片
-            [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagModel.tagBackSelectedImageUrl] completed:^(UIImage * _Nullable image, NSURL * _Nullable imageURL) {
+            [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagModel.tagBackSelectedImageUrl] completed:^(UIImage * image) {
                
                 [self p_HandleTagBackImage:image tagModel:tagModel];
             }];
@@ -97,7 +97,7 @@
         
         if (tagModel.tagBackNormalImageUrl && tagModel.tagBackNormalImageUrl.length) {
             //下载网络图片
-            [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagModel.tagBackNormalImageUrl] completed:^(UIImage * _Nullable image, NSURL * _Nullable imageURL) {
+            [UIImageView jp_downloadImageWithURL:[NSURL URLWithString:tagModel.tagBackNormalImageUrl] completed:^(UIImage * image) {
                 
                 [self p_HandleTagBackImage:image tagModel:tagModel];
             }];

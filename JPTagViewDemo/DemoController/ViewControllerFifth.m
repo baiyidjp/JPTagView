@@ -64,7 +64,7 @@
     tagView.tagColumnMargin = 2;
     tagView.tagRowMargin = 2;
     
-//    tagView.isShowSection = NO;
+    tagView.tagDeleteImage = [UIImage imageNamed:@"icon_delete"];
     
     [tagView setTagViewDataWith:models];
     

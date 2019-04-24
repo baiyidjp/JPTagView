@@ -41,8 +41,7 @@
     [attributesString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, attributesString.length)];
     [attributesString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(0, attributesString.length)];
     NSTextAttachment *attch = [[NSTextAttachment alloc] init];
-    NSBundle *tagViewBundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"JPTagView" ofType:@"bundle"]];
-    attch.image = [UIImage imageWithContentsOfFile:[tagViewBundle pathForResource:@"icon_delete@2x" ofType:@"png"]];
+    attch.image = [UIImage imageNamed:@"icon_delete"];
     attch.bounds = CGRectMake(0, 0, 12, 12);
     NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attch];
     [attributesString insertAttributedString:string atIndex:0];
@@ -97,6 +96,8 @@
     
     tagView.isTagCanClickWhenSelected = NO;
     tagView.isCanSelectedTag = NO;
+    
+    tagView.tagDeleteImage = [UIImage imageNamed:@"icon_delete"];
     
     [tagView setTagViewDataWith:models];
     

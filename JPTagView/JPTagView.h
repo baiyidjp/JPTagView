@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //删除相关
 
-/** tagDeleteImage */
+/** tagDeleteImage  default [UIImage imageNamed:@""] */
 @property(nonatomic,strong) UIImage *tagDeleteImage;
 
 /** isShowDelete default NO 展示delete 设置 tagBackContentInset 至少为 4.4.4.4 */
@@ -180,6 +180,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** isCanSelectedTag default YES */
 @property(nonatomic,assign) BOOL isCanSelectedTag;
+
+/** isShowSelectedState default YES */
+@property(nonatomic,assign) BOOL isShowSelectedState;
 
 /** isTagCanClickWhenSelected 是否可以点击已选中的tag default YES */
 @property(nonatomic,assign) BOOL isTagCanClickWhenSelected;
