@@ -14,6 +14,7 @@
 #import "ViewControllerFourth.h"
 #import "ViewControllerFifth.h"
 #import "ViewControllerSix.h"
+#import "ViewControllerSeven.h"
 
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 /** dataArray */
@@ -88,6 +89,11 @@
             controller = [[ViewControllerSix alloc] init];
         }
             break;
+        case 7:
+        {
+            controller = [[ViewControllerSeven alloc] init];
+        }
+            break;
 
     }
     
@@ -99,7 +105,7 @@
     
     if (!_dataArray) {
         
-        _dataArray = @[@"0-默认",@"1-不展示组头",@"2-默认展示删除",@"3-圆角加边框",@"4-网络图片背景",@"5-长按展示删除和动画",@"6-展示自定义富文本Tag&代理"];
+        _dataArray = @[@"0-默认",@"1-不展示组头",@"2-默认展示删除",@"3-圆角加边框",@"4-网络图片背景",@"5-长按展示删除和动画",@"6-展示自定义富文本Tag&代理",@"7-横向"];
     }
     return _dataArray;
 }
