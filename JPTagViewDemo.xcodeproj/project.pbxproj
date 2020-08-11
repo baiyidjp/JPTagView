@@ -21,6 +21,7 @@
 		B8161EE922433360001CF43F /* ViewControllerFourth.m in Sources */ = {isa = PBXBuildFile; fileRef = B8161EE822433360001CF43F /* ViewControllerFourth.m */; };
 		B8161EEC22433381001CF43F /* ViewControllerFifth.m in Sources */ = {isa = PBXBuildFile; fileRef = B8161EEB22433381001CF43F /* ViewControllerFifth.m */; };
 		B85F343222460AC900BA7D14 /* ViewControllerSix.m in Sources */ = {isa = PBXBuildFile; fileRef = B85F343122460AC900BA7D14 /* ViewControllerSix.m */; };
+		B8AA6DD8231D140600773108 /* ViewControllerSeven.m in Sources */ = {isa = PBXBuildFile; fileRef = B8AA6DD7231D140600773108 /* ViewControllerSeven.m */; };
 		B8E911D52270520800C805FB /* JPTagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E911C72270520800C805FB /* JPTagModel.m */; };
 		B8E911D62270520800C805FB /* UIImage+JPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E911CB2270520800C805FB /* UIImage+JPCategory.m */; };
 		B8E911D72270520800C805FB /* UIImageView+JPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B8E911CD2270520800C805FB /* UIImageView+JPCategory.m */; };
@@ -56,6 +57,8 @@
 		B8161EEB22433381001CF43F /* ViewControllerFifth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerFifth.m; sourceTree = "<group>"; };
 		B85F343022460AC900BA7D14 /* ViewControllerSix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerSix.h; sourceTree = "<group>"; };
 		B85F343122460AC900BA7D14 /* ViewControllerSix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSix.m; sourceTree = "<group>"; };
+		B8AA6DD6231D140600773108 /* ViewControllerSeven.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewControllerSeven.h; sourceTree = "<group>"; };
+		B8AA6DD7231D140600773108 /* ViewControllerSeven.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSeven.m; sourceTree = "<group>"; };
 		B8E911C72270520800C805FB /* JPTagModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPTagModel.m; sourceTree = "<group>"; };
 		B8E911C82270520800C805FB /* UIView+JPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JPCategory.h"; sourceTree = "<group>"; };
 		B8E911C92270520800C805FB /* JPTagLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPTagLayout.h; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				B8161EEB22433381001CF43F /* ViewControllerFifth.m */,
 				B85F343022460AC900BA7D14 /* ViewControllerSix.h */,
 				B85F343122460AC900BA7D14 /* ViewControllerSix.m */,
+				B8AA6DD6231D140600773108 /* ViewControllerSeven.h */,
+				B8AA6DD7231D140600773108 /* ViewControllerSeven.m */,
 			);
 			path = DemoController;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				B8E911DA2270520800C805FB /* JPTagCell.m in Sources */,
 				B8161E6222425B0F001CF43F /* AppDelegate.m in Sources */,
 				B8E911D92270520800C805FB /* UIView+JPCategory.m in Sources */,
+				B8AA6DD8231D140600773108 /* ViewControllerSeven.m in Sources */,
 				B8E911D62270520800C805FB /* UIImage+JPCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
