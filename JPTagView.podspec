@@ -1,14 +1,14 @@
-
-
 Pod::Spec.new do |s|
 
   s.name         = "JPTagView"
-  s.version      = "1.6.0"
+  s.version      = "1.6.1"
   s.summary      = "Customized tag pages."
   s.homepage     = "https://github.com/baiyidjp/JPTagViewDemo"
   s.license      = "MIT"
   s.author             =  "baiyi"
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'}
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'}
   s.source       = { :git => "https://github.com/baiyidjp/JPTagViewDemo.git", :tag => "#{s.version}" }
   s.source_files  = "JPTagView/*.{h,m}"
   s.requires_arc = true
