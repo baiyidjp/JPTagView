@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JPTagView"
-  s.version      = "1.6.3"
+  s.version      = "1.6.5"
   s.summary      = "Customized tag pages."
   s.homepage     = "https://github.com/baiyidjp/JPTagView"
   s.license      = "MIT"
