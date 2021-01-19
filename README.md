@@ -7,7 +7,7 @@ Customized tag pages
 pod 'JPTagView' 
 
 或者直接使用 GitHub 链接
-pod 'JPTagView' :git => "https://github.com/baiyidjp/JPTagView.git", :tag => '1.6.1'
+pod 'JPTagView', :git => "https://github.com/baiyidjp/JPTagView.git", :tag => '1.5.1'
 
 
 在使用的页面中 引用 #import "JPTagView.h"
