@@ -3,7 +3,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "JPTagView"
-  s.version      = "1.5.1"
+  s.version      = "1.6.0"
   s.summary      = "Customized tag pages."
   s.homepage     = "https://github.com/baiyidjp/JPTagViewDemo"
   s.license      = "MIT"
@@ -13,6 +13,9 @@ Pod::Spec.new do |s|
   s.source_files  = "JPTagView/*.{h,m}"
   s.requires_arc = true
   s.dependency "SDWebImage"
+  # s.dependency 'JPCategory-OC/UIView', '1.2.3'
+  # s.dependency 'JPCategory-OC/UIImage', '1.2.3'
+  s.dependency 'JPCategory-OC/UIView', :git => "https://github.com/baiyidjp/JPCategory-OC.git", :tag => '1.2.3'
+  s.dependency 'JPCategory-OC/UIImage', :git => "https://github.com/baiyidjp/JPCategory-OC.git", :tag => '1.2.3'
 # pod trunk push --allow-warnings
-# 将修改文件copy到JPTagView
 end

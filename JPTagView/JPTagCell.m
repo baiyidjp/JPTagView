@@ -83,7 +83,7 @@
             
         } else if (tagModel.tagBackSelectedColor) {
             //只有颜色
-            UIImage *selectedImage = [UIImage imageWithColor:tagModel.tagBackSelectedColor];
+            UIImage *selectedImage = [UIImage jp_imageWithColor:tagModel.tagBackSelectedColor];
             [self p_HandleTagBackImage:selectedImage tagModel:tagModel];
         }
         
@@ -108,7 +108,7 @@
             
         } else if (tagModel.tagBackNormalColor) {
             //只有颜色
-            UIImage *normalImage = [UIImage imageWithColor:tagModel.tagBackNormalColor];
+            UIImage *normalImage = [UIImage jp_imageWithColor:tagModel.tagBackNormalColor];
             [self p_HandleTagBackImage:normalImage tagModel:tagModel];
         }
         
@@ -179,7 +179,7 @@
     //存在图片 根据条件展示
     if (tagModel.isShowTagCornerRadius && tagModel.isShowTagBorder) {
         //圆角+边框
-        [tagBackImage jp_asynCornerBorderImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
+        [tagBackImage jp_asynRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
             [self.tagBackImageButton setBackgroundImage:borderImage forState:UIControlStateNormal];
         }];
     } else if (tagModel.isShowTagCornerRadius) {
@@ -189,7 +189,7 @@
         }];
     } else if (tagModel.isShowTagCornerRadius) {
         //边框
-        [tagBackImage jp_asynCornerBorderImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:0 borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
+        [tagBackImage jp_asynRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:0 borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
             [self.tagBackImageButton setBackgroundImage:borderImage forState:UIControlStateNormal];
         }];
     } else {
