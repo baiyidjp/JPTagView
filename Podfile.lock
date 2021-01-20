@@ -1,13 +1,13 @@
 PODS:
-  - JPCategory-OC/UIImage (1.2.3)
-  - JPCategory-OC/UIView (1.2.3)
+  - JPCategory-OC/UIImage (1.5.0)
+  - JPCategory-OC/UIView (1.5.0)
   - SDWebImage (5.0.1):
     - SDWebImage/Core (= 5.0.1)
   - SDWebImage/Core (5.0.1)
 
 DEPENDENCIES:
-  - JPCategory-OC/UIImage (from `https://github.com/baiyidjp/JPCategory-OC.git`, tag `1.2.3`)
-  - JPCategory-OC/UIView (from `https://github.com/baiyidjp/JPCategory-OC.git`, tag `1.2.3`)
+  - JPCategory-OC/UIImage (from `https://github.com/baiyidjp/JPCategory-OC.git`, tag `1.5.0`)
+  - JPCategory-OC/UIView (from `https://github.com/baiyidjp/JPCategory-OC.git`, tag `1.5.0`)
   - SDWebImage
 
 SPEC REPOS:
@@ -17,17 +17,17 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   JPCategory-OC:
     :git: https://github.com/baiyidjp/JPCategory-OC.git
-    :tag: 1.2.3
+    :tag: 1.5.0
 
 CHECKOUT OPTIONS:
   JPCategory-OC:
     :git: https://github.com/baiyidjp/JPCategory-OC.git
-    :tag: 1.2.3
+    :tag: 1.5.0
 
 SPEC CHECKSUMS:
-  JPCategory-OC: d728b7050adfd69971c20681c8a7674bb9c9a44d
+  JPCategory-OC: 6d31f04c7f55fe81cae15c52a85bd79c03f987f8
   SDWebImage: 27dd2c9ea07a2252f94557c9fbb6105ee94b74c9
 
-PODFILE CHECKSUM: 00a4a31edbe388a4f0a16cb9b70ac2caf04b082a
+PODFILE CHECKSUM: 98525d91dafbfa8907908b9394b99a0fcd6fb690
 
 COCOAPODS: 1.10.0

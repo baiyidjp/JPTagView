@@ -179,17 +179,17 @@
     //存在图片 根据条件展示
     if (tagModel.isShowTagCornerRadius && tagModel.isShowTagBorder) {
         //圆角+边框
-        [tagBackImage jp_asynRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
+        [tagBackImage jp_asyncRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
             [self.tagBackImageButton setBackgroundImage:borderImage forState:UIControlStateNormal];
         }];
     } else if (tagModel.isShowTagCornerRadius) {
         //圆角
-        [tagBackImage jp_asynCornerImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius completion:^(UIImage * _Nonnull cornerImage) {
+        [tagBackImage jp_asyncCornerImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:tagCornerRadius completion:^(UIImage * _Nonnull cornerImage) {
             [self.tagBackImageButton setBackgroundImage:cornerImage forState:UIControlStateNormal];
         }];
     } else if (tagModel.isShowTagCornerRadius) {
         //边框
-        [tagBackImage jp_asynRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:0 borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
+        [tagBackImage jp_asyncRoundImageWithSize:self.tagBackImageButton.bounds.size cornerRadius:0 borderWidth:tagBorderWidth borderColor:tagBorderColor completion:^(UIImage * _Nonnull borderImage) {
             [self.tagBackImageButton setBackgroundImage:borderImage forState:UIControlStateNormal];
         }];
     } else {
